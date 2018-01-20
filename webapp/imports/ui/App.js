@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/login';
-import AccountsUIWrapper from './AcAccountsUIWrapper';
+import AccountsUIWrapper from './AccountsUiWrapper';
 
 export default class App extends Component {
   render() {
