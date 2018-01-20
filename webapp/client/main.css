@@ -1,0 +1,25 @@
+/* CSS declarations go here */
+
+.fm-container { 
+  border: 2px dashed #000000;
+  padding: 5px;
+}
+
+.fm-login-box {
+  padding: 15px;
+  text-align: center;
+}
+
+.fm-login-box form label {
+  margin-right: 5px;
+}
+
+.fm-login-box form button {
+  border: 0;
+  padding: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
