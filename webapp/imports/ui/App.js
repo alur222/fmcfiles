@@ -16,7 +16,7 @@ class App extends Component {
 
         <LoginBox />
 
-        { this.props.currentUser ?
+        { currentUser ?
           <FilesList />
         : ''}
       </div>
