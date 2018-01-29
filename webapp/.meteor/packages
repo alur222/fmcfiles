@@ -22,3 +22,4 @@ shell-server@0.3.0            # Server-side component of the `meteor shell` comm
 accounts-ui
 accounts-password
 alanning:roles
+react-meteor-data
