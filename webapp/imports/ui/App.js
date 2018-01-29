@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/login';
-import AccountsUIWrapper from './AccountsUiWrapper';
+import LoginBox from './components/loginBox';
 
 export default class App extends Component {
   render() {
@@ -10,7 +10,8 @@ export default class App extends Component {
           <h2 className="text-center"> FMC FILES </h2>
         </header>
 
-        <AccountsUIWrapper />
+        <LoginBox />
+
       </div>
     );
   }

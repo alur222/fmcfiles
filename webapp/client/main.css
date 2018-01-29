@@ -14,6 +14,14 @@
   margin-right: 5px;
 }
 
+.fm-login-buttons {
+  padding: 5px;
+  border: 1px dashed;
+  background: #efeeee;
+  display: block;
+  margin: 15px auto;
+}
+
 .fm-login-box form button {
   border: 0;
   padding: 15px;
