@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Images } from '../../collections';
+import { FMCFiles } from '../../collections';
 import { withTracker } from 'meteor/react-meteor-data';
 
 class FilesList extends React.Component {
@@ -18,7 +18,7 @@ class FilesList extends React.Component {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
       // We upload only one file, in case
       // multiple files were selected
-      const upload = Images.insert({
+      const upload = FMCFiles.insert({
         file: e.currentTarget.files[0],
         streams: 'dynamic',
         chunkSize: 'dynamic',
@@ -72,11 +72,11 @@ class FilesList extends React.Component {
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('files.images.all');
+  Meteor.subscribe('files.FMCFiles.all');
 
   return {
     currentUser: Meteor.user(),
-    filesList: Meteor.user() ? Images.find().fetch() : [],
+    filesList: Meteor.user() ? FMCFiles.find().fetch() : [],
   };
 })(FilesList);
 

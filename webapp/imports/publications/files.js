@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { Images } from '../collections';
+import { FMCFiles } from '../collections';
 
-Meteor.publish('files.images.all', function () {
-  return Images.find().cursor;
+Meteor.publish('files.FMCFiles.all', function () {
+  return FMCFiles.find().cursor;
 });
