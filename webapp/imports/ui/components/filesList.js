@@ -1,7 +1,11 @@
 import React from 'react';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { FMCFiles } from '../../collections';
+import { Roles } from 'meteor/alanning:roles';
 import { withTracker } from 'meteor/react-meteor-data';
+
+import { FMCFiles } from '../../collections';
+import { deleteFile } from '../../methods/files/files';
+import { STAFF_ROLES, MANAGER_ROLES } from '../../constants';
 
 class FilesList extends React.Component {
   constructor(props) {
@@ -9,6 +13,16 @@ class FilesList extends React.Component {
     this.state = {
       currentUpload: new ReactiveVar(false)
     };
+  }
+
+  handleDeleteFile(id, e) {
+    deleteFile.call({
+      fileId: id,
+    }, function(err) {
+      if (err) {
+        alert(err)
+      }
+    })
   }
 
   handleUpload(e) {
@@ -45,6 +59,26 @@ class FilesList extends React.Component {
     }
   }
 
+  canDeleteFile(file) {
+    const { currentUser } = this.props;
+    if (currentUser) {
+      // if manager, return true;
+      if (Roles.userIsInRole(currentUser._id, 'delete-all-files')) {
+        return true;
+      } else if (Roles.userIsInRole(currentUser._id, 'delete-own-files')) {
+        if (file.userId === currentUser._id) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const { filesList, currentUser } = this.props;
     const { currentUpload } = this.state;
@@ -61,6 +95,9 @@ class FilesList extends React.Component {
               <div className="fm-list-item" key={fl._id}>
                 <p>Filename: {fl.name}</p>
                 <p>type: {fl.type} </p>
+                {this.canDeleteFile(fl) ?
+                  <button className="fm-login-buttons" onClick={this.handleDeleteFile.bind(this, fl._id)}>Delete</button>
+                : ''}
               </div>
             ))}
           </div>
@@ -76,7 +113,9 @@ export default withTracker(() => {
 
   return {
     currentUser: Meteor.user(),
-    filesList: Meteor.user() ? FMCFiles.find().fetch() : [],
+    filesList: Meteor.user() ? FMCFiles.find({}, {
+      sort: { 'meta.dateUploaded': -1 }
+    }).fetch() : [],
   };
 })(FilesList);
 
