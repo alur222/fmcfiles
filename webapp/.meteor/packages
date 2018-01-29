@@ -24,4 +24,5 @@ accounts-password
 alanning:roles
 react-meteor-data
 mdg:validated-method
-aldeed:simple-schema
+ostrio:files
+aldeed:collection2-core@2.0.0
